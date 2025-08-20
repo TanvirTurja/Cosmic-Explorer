@@ -19,16 +19,16 @@ const CATEGORY_QUERIES: Record<string, string> = {
 };
 
 // Alternative queries if primary ones don't work
-const ALTERNATIVE_QUERIES: Record<string, string[]> = {
-  'Black Holes': ['supermassive', 'sagittarius a', 'event horizon'],
-  'Mars Rover': ['mars surface', 'curiosity', 'perseverance', 'mars exploration']
-};
+// const ALTERNATIVE_QUERIES: Record<string, string[]> = {
+//   'Black Holes': ['supermassive', 'sagittarius a', 'event horizon'],
+//   'Mars Rover': ['mars surface', 'curiosity', 'perseverance', 'mars exploration']
+// };
 
 // Simulate API delay for better UX
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Helper function to get the best available image URL
-const getBestImageUrl = (item: any): string => {
+const getBestImageUrl = (item: { links?: { href?: string }[] }): string => {
   // Try to get the highest quality image available
   if (item.links && item.links.length > 0) {
     // Look for medium or large images first
@@ -38,7 +38,7 @@ const getBestImageUrl = (item: any): string => {
       }
     }
     // Fallback to the first available image
-    return item.links[0].href;
+    return item.links[0].href || '';
   }
   return '';
 };
@@ -110,7 +110,7 @@ export const fetchCosmicData = async (searchTerm: string = '', category: string 
     
     // Transform NASA Images API data into our CosmicObject format
     let cosmicObjects: CosmicObject[] = imageData.collection.items
-      .map((item: any, index: number) => {
+      .map((item: { data?: { title?: string; date_created?: string; nasa_id?: string; description?: string }[]; links?: { href?: string }[] }, index: number) => {
         const title = item.data?.[0]?.title || `Cosmic Object ${index + 1}`;
         const dateCreated = item.data?.[0]?.date_created ? new Date(item.data[0].date_created) : new Date();
         const imageUrl = getBestImageUrl(item);
@@ -335,13 +335,13 @@ export interface NASAFilterOptions {
 }
 
 // Function to make direct NASA Images API calls (no API key required)
-export const makeNASAAPICall = async (endpoint: string, params: Record<string, any> = {}) => {
+export const makeNASAAPICall = async (endpoint: string, params: Record<string, unknown> = {}) => {
   try {
     const url = new URL(`${NASA_IMAGES_BASE_URL}${endpoint}`);
     
     // Add any additional parameters
     Object.keys(params).forEach(key => {
-      url.searchParams.append(key, params[key].toString());
+      url.searchParams.append(key, String(params[key]));
     });
     
     const response = await fetch(url.toString());

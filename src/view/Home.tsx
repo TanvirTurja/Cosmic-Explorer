@@ -1,4 +1,3 @@
-import React from 'react';
 import Nav from '../component/Nav';
 import Footer from '../component/Footer';
 
@@ -34,32 +33,6 @@ const Home = () => {
       date: 'Live',
       description: 'New star formation in progress'
     }
-  ];
-
-  // Features data
-  const features = [
-    {
-      title: 'Live Activity Feed',
-      description: 'Monitor cosmic phenomena in real-time using NASA\'s space telescope network.',
-      icon: '🌌',
-    },
-    {
-      title: 'NASA Data Integration',
-      description: 'Direct feeds from Chandra X-ray Observatory, Hubble Space Telescope, and James Webb Space Telescope observations.',
-      icon: '📡',
-    },
-    {
-      title: 'Instant Alerts',
-      description: 'Get notified when cosmic objects show unusual activity or new discoveries are made.',
-      icon: '⚡',
-    },
-  ];
-
-   const dataSources = [
-    { name: 'Chandra X-ray', description: 'High-energy emissions', icon: '🔭' },
-    { name: 'Hubble Space', description: 'Optical observations', icon: '🌟' },
-    { name: 'James Webb', description: 'Infrared imaging', icon: '🔴' },
-    { name: 'Swift Gamma', description: 'Burst detection', icon: '⚡' }
   ];
 
   return (

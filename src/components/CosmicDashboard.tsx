@@ -6,7 +6,7 @@ import SearchFilter from './SearchFilter';
 import LoadingSpinner from './LoadingSpinner';
 import CosmicObjectModal from './CosmicObjectModal';
 import RefreshButton from './RefreshButton';
-import type { CosmicObject } from '../types/cosmic';
+import type { CosmicObject, FilterOptions } from '../types/cosmic';
 
 const CosmicDashboard: React.FC = () => {
   const { 
@@ -41,7 +41,7 @@ const CosmicDashboard: React.FC = () => {
     loadInitialData();
   }, [dispatch]);
 
-  const handleFilterChange = useCallback((newFilters: any) => {
+  const handleFilterChange = useCallback((newFilters: FilterOptions) => {
     updateFilters(newFilters);
     
     // Apply filters by making a new API call with the search parameters
@@ -195,7 +195,7 @@ const CosmicDashboard: React.FC = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           onRefresh={handleModalRefresh}
-          getActivityData={async (id: string) => {
+          getActivityData={async () => {
             // Mock implementation for now
             return null;
           }}

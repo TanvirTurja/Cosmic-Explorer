@@ -5,7 +5,7 @@ export interface CosmicObject {
   description: string;
   dateCreated: Date;
   nasaImageUrl: string;
-  metadata: Record<string, any>;
+  metadata: Record<string, unknown>;
 }
 
 export interface ActivityData {

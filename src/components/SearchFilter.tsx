@@ -34,7 +34,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 
     // Cleanup function to clear timeout
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, category]); // Only depend on searchTerm and category
+  }, [searchTerm, category, initialFilters, onFilterChange]); // Include all dependencies
 
   const handleReset = useCallback(() => {
     setSearchTerm('');

@@ -13,7 +13,7 @@ type DashboardAction =
   | { type: 'REMOVE_COSMIC_OBJECT'; payload: string };
 
 // Initial state
-const initialState: DashboardState = {
+const createInitialState = (): DashboardState => ({
   cosmicObjects: [],
   loading: false,
   error: null,
@@ -32,7 +32,9 @@ const initialState: DashboardState = {
     'Artemis',
     'Mars Rover'
   ]
-};
+});
+
+const initialState = createInitialState();
 
 // Reducer
 function dashboardReducer(state: DashboardState, action: DashboardAction): DashboardState {

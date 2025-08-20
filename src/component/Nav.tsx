@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

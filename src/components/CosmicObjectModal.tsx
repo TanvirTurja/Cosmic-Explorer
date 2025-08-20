@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import type { CosmicObject, ActivityData } from '../types/cosmic';
 import RefreshButton from './RefreshButton';
 
@@ -7,7 +7,7 @@ interface CosmicObjectModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRefresh: () => void;
-  getActivityData: (id: string) => Promise<ActivityData | null>;
+  getActivityData: () => Promise<ActivityData | null>;
 }
 
 const CosmicObjectModal: React.FC<CosmicObjectModalProps> = ({ 
@@ -17,20 +17,13 @@ const CosmicObjectModal: React.FC<CosmicObjectModalProps> = ({
   onRefresh,
   getActivityData
 }) => {
-  const [activityData, setActivityData] = useState<ActivityData | null>(null);
-  const [loadingActivity, setLoadingActivity] = useState(false);
-
   useEffect(() => {
     if (isOpen && cosmicObject) {
       const fetchActivityData = async () => {
-        setLoadingActivity(true);
         try {
-          const data = await getActivityData(cosmicObject.id);
-          setActivityData(data);
+          await getActivityData();
         } catch (error) {
           console.error('Error fetching activity data:', error);
-        } finally {
-          setLoadingActivity(false);
         }
       };
       
