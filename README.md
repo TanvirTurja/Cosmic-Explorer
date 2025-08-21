@@ -33,7 +33,7 @@ Cosmic Explorer is a React-based web application that visualizes cosmic phenomen
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/cosmic-explorer.git
+   git clone https://github.com/TanvirTurja/Cosmic-Explorer.git
    ```
 
 2. Navigate to the project directory:
